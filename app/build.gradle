@@ -23,15 +23,17 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1-jre'
-    implementation 'com.google.code.gson:gson:2.8.8'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.welcomeToJeJu.moj.App'
+    mainClass = 'com.welcomeToJeju.moj.App'
 }
-eclipse{
+
+eclipse {
     project {
-        name = "welcome-to-jeju"
+        name = "wtj"
     }
 }
+
+

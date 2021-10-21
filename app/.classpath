@@ -33,16 +33,6 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.7.4/f4699a345b9f0d44075a1da62610260cfbf68c6e/mariadb-java-client-2.7.4-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.7.4/6d6ea84c870837afa63f5f55efde211a84cf2897/mariadb-java-client-2.7.4.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.8/c0f02b42d0474823279fc9606a81338896d59941/gson-2.8.8-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.8/431fc3cbc0ff81abdbfde070062741089c3ba874/gson-2.8.8.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1d064e61aad6c51cc77f9b59dc2cccc78e792f5a/failureaccess-1.0.1-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
