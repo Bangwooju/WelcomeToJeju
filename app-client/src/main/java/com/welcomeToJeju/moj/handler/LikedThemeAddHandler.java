@@ -1,5 +1,6 @@
 package com.welcomeToJeju.moj.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.util.Prompt;
@@ -7,9 +8,11 @@ import com.welcomeToJeju.util.Prompt;
 public class LikedThemeAddHandler implements Command {
 
   ThemeDao themeDao;
+  SqlSession sqlSession;
 
-  public LikedThemeAddHandler(ThemeDao themeDao) {
+  public LikedThemeAddHandler(ThemeDao themeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -32,7 +35,7 @@ public class LikedThemeAddHandler implements Command {
       return;
     }
 
-    if (theme.getThemeOwnerNo() == AuthLoginHandler.getLoginUser().getNo()) {
+    if (theme.getOwner() == AuthLoginHandler.getLoginUser()) {
       System.out.println("본인의 테마 좋아요 등록 불가!");
       return;
     }
@@ -52,7 +55,8 @@ public class LikedThemeAddHandler implements Command {
       }
     }
 
-    themeDao.likedThemeInsert(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    themeDao.insertLikedTheme(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    sqlSession.commit();
 
 
     System.out.println("좋아요 등록 완료!");

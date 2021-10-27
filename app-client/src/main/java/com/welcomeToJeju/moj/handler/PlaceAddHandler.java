@@ -1,9 +1,11 @@
 package com.welcomeToJeju.moj.handler;
 
 import java.util.ArrayList;
-
+import org.apache.ibatis.session.SqlSession;
 import com.google.gson.Gson;
-import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.domain.Comment;
+import com.welcomeToJeju.moj.domain.Photo;
 import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.util.KakaoMapApi;
@@ -12,12 +14,14 @@ import com.welcomeToJeju.util.Prompt;
 
 public class PlaceAddHandler implements Command {
 
-	ThemeDao themeDao;
-	
-  public PlaceAddHandler(ThemeDao themeDao) {
-  	this.themeDao = themeDao;
+  PlaceDao placeDao;
+  SqlSession sqlSession;
+
+  public PlaceAddHandler(PlaceDao placeDao, SqlSession sqlSession) {
+    this.placeDao = placeDao;
+    this.sqlSession = sqlSession;
   }
-	
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     Gson gson = new Gson();
@@ -49,8 +53,8 @@ public class PlaceAddHandler implements Command {
       }
 
       if(filterPlace.size() == 0) {
-      	System.out.println("검색된 장소가 없습니다.");
-      	continue;
+        System.out.println("검색된 장소가 없습니다.");
+        continue;
       }
       int i = 1;
       for(KakaoVo kakaoVo : filterPlace) {
@@ -74,13 +78,37 @@ public class PlaceAddHandler implements Command {
       place.setxCoord(selectedPlace.getX());
       place.setyCoord(selectedPlace.getY());
       place.setTheme(theme/*.getTitle()*/);
+      ArrayList<Photo> photos = new ArrayList<>();
+      while(true) {
+        Photo photo = new Photo();
+        String photoName = Prompt.inputString("사진 (종료 : 엔터) > ");
+        if(photoName.length() == 0) break;
+        photo.setFilePath(photoName);
+        photos.add(photo);
+      }
+
+      place.setPhotos(photos);
 
       break;
     }
 
-    place.getComments().add(Prompt.inputString("장소 후기 > "));
-    themeDao.placeInsert(place);
-    
+    Comment comment = new Comment();
+    String comment_content = Prompt.inputString("장소 후기 > ");
+    comment.setComment(comment_content);
+    place.getComments().add(comment);
+    placeDao.insert(place);
+
+    for(Comment cmt : place.getComments()) {
+      placeDao.insertComment(place.getNo(), AuthLoginHandler.getLoginUser().getNo(), 
+          cmt.getComment());
+    }
+
+    for(Photo photo : place.getPhotos()) {
+      placeDao.insertPhoto(place.getNo(),AuthLoginHandler.getLoginUser().getNo(), photo.getFilePath());
+    }
+
+    sqlSession.commit();
+
     System.out.println("장소 등록 완료!");
   }
 }

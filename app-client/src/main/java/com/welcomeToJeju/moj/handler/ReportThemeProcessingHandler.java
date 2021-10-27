@@ -3,7 +3,6 @@ package com.welcomeToJeju.moj.handler;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.welcomeToJeju.moj.dao.ReportDao;
 import com.welcomeToJeju.moj.domain.ReportTheme;
 import com.welcomeToJeju.moj.domain.Theme;
@@ -12,14 +11,14 @@ import com.welcomeToJeju.util.Prompt;
 
 public class ReportThemeProcessingHandler implements Command {
 
-	ReportDao reportDao;
-	ThemePrompt themePrompt;
-	UserPrompt userPrompt;
-	
+  ReportDao reportDao;
+  ThemePrompt themePrompt;
+  UserPrompt userPrompt;
+
   public ReportThemeProcessingHandler(ReportDao reportDao, ThemePrompt themePrompt,UserPrompt userPrompt) {
-  	this.reportDao = reportDao;
-  	this.themePrompt = themePrompt;
-  	this.userPrompt = userPrompt;
+    this.reportDao = reportDao;
+    this.themePrompt = themePrompt;
+    this.userPrompt = userPrompt;
   }
 
   @Override
@@ -52,18 +51,18 @@ public class ReportThemeProcessingHandler implements Command {
         continue;
       }
 
-      selectedUser = userPrompt.findByNo(countedThemeList.get(selectedNum-1).getThemeOwnerNo()); 
+      selectedUser = userPrompt.findByNo(countedThemeList.get(selectedNum-1).getOwner().getNo()); 
 
       showReportedThemeInfo(reportThemeList,countedThemeList,selectedNum);
 
       break;
     }
-    
+
     while(true) {
       String isWaring = Prompt.inputString("경고주기 (y/N) > ");
 
       if(isWaring.equalsIgnoreCase("y")) {
-      	userPrompt.increaseWariningCount(selectedUser);
+        userPrompt.increaseWariningCount(selectedUser);
         break;
       } else if (isWaring.equalsIgnoreCase("n")) {
         return;
@@ -72,7 +71,7 @@ public class ReportThemeProcessingHandler implements Command {
         continue;
       }
     }
-    
+
   }
 
   private void showReportedThemeInfo(List<ReportTheme> reportThemeList, List<Theme> countedThemeList, int selectedNum) {

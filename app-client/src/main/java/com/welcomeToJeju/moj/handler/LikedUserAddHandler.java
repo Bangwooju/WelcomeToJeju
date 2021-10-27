@@ -1,5 +1,6 @@
 package com.welcomeToJeju.moj.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.util.Prompt;
@@ -8,10 +9,13 @@ public class LikedUserAddHandler implements Command {
 
   UserDao userDao;
   UserPrompt userPrompt;
+  SqlSession sqlSession;
 
-  public LikedUserAddHandler(UserDao userDao,UserPrompt userPrompt) {
+
+  public LikedUserAddHandler(UserDao userDao,UserPrompt userPrompt, SqlSession sqlSession) {
     this.userDao = userDao;
     this.userPrompt = userPrompt;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -34,13 +38,15 @@ public class LikedUserAddHandler implements Command {
       System.out.println("본인은 좋아요 불가!");
       return;
     }
+
     if(userPrompt.isAlreadyRegisterLikedUser(likedUser, AuthLoginHandler.getLoginUser().getNo())) {
       System.out.println("이미 등록된 유저!");
       return;
     }
 
-    userDao.userLikedUserInsert(likedUser.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    userDao.insertLikedUser(AuthLoginHandler.getLoginUser().getNo(), likedUser.getNo());
 
+    sqlSession.commit();
     System.out.println("좋아하는 유저 등록 완료!");
 
   }

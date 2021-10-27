@@ -24,7 +24,7 @@ public class MyThemeListHandler implements Command {
     }
 
     for (Theme theme : themeList) {
-      if(AuthLoginHandler.getLoginUser().getNo() == theme.getThemeOwnerNo()) {
+      if(AuthLoginHandler.getLoginUser()== theme.getOwner()) {
         System.out.printf("<%d>\n", i++);
         System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
         System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());

@@ -1,5 +1,7 @@
 package com.welcomeToJeju.moj.handler;
 
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
@@ -7,10 +9,15 @@ import com.welcomeToJeju.util.Prompt;
 
 public class PlaceDeleteHandler implements Command{
 
-  ThemeDao themeDao;
 
-  public PlaceDeleteHandler(ThemeDao themeDao) {
+  PlaceDao placeDao;
+  ThemeDao themeDao;
+  SqlSession sqlSession;
+
+  public PlaceDeleteHandler(ThemeDao themeDao,PlaceDao placeDao, SqlSession sqlSession) {
+    this.placeDao = placeDao;
     this.themeDao = themeDao;
+    this.sqlSession =sqlSession;
   }
 
   @Override
@@ -35,7 +42,10 @@ public class PlaceDeleteHandler implements Command{
         return;
       }
 
-      themeDao.placeDelete(place);
+      placeDao.deleteComment(place.getNo());
+      placeDao.deletePhoto(place.getNo());
+      placeDao.delete(place.getNo());
+      sqlSession.commit();
 
       System.out.printf("테마 삭제하기 완료!\n");
       return;

@@ -1,19 +1,19 @@
 package com.welcomeToJeju.moj;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.welcomeToJeju.context.UserContextListener;
 import com.welcomeToJeju.menu.Menu;
 import com.welcomeToJeju.menu.MenuFilter;
 import com.welcomeToJeju.menu.MenuGroup;
+import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.dao.ReportDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
-import com.welcomeToJeju.moj.dao.impl.MariadbThemeDao;
-import com.welcomeToJeju.moj.dao.impl.MariadbUserDao;
-import com.welcomeToJeju.moj.dao.impl.NetReportDao;
 import com.welcomeToJeju.moj.handler.AdminUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.AdminUserUpdateHandler;
 import com.welcomeToJeju.moj.handler.AllThemeListHandler;
@@ -38,10 +38,6 @@ import com.welcomeToJeju.moj.handler.PlaceDeleteHandler;
 import com.welcomeToJeju.moj.handler.PlaceListHandler;
 import com.welcomeToJeju.moj.handler.RealTimeRankHandler;
 import com.welcomeToJeju.moj.handler.ReportAddThemeHandler;
-import com.welcomeToJeju.moj.handler.ReportAddUserHandler;
-import com.welcomeToJeju.moj.handler.ReportMyListHandler;
-import com.welcomeToJeju.moj.handler.ReportThemeProcessingHandler;
-import com.welcomeToJeju.moj.handler.ReportUserProcessingHandler;
 import com.welcomeToJeju.moj.handler.SearchHashtagHandler;
 import com.welcomeToJeju.moj.handler.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.SearchUserHandler;
@@ -54,13 +50,11 @@ import com.welcomeToJeju.moj.handler.UserPrompt;
 import com.welcomeToJeju.moj.handler.UserRankHandler;
 import com.welcomeToJeju.moj.handler.UserUpdateHandler;
 import com.welcomeToJeju.moj.listener.LoginListener;
-import com.welcomeToJeju.request.RequestAgent;
 import com.welcomeToJeju.util.Prompt;
 
 public class ClientApp {
 
-  RequestAgent requestAgent;
-  Connection con;
+  SqlSession sqlSession;
 
   HashMap<String,Command> commandMap = new HashMap<>();
   List<UserContextListener> userListeners = new ArrayList<>();
@@ -102,57 +96,58 @@ public class ClientApp {
 
   public ClientApp() throws Exception{
 
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/jejudb?user=jeju&password=1111");
+    //    con = DriverManager.getConnection(
+    //        "jdbc:mysql://localhost:3306/jejudb?user=jeju&password=1111");
+    sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/welcomeToJeju/moj/conf/mybatis-config.xml")).openSession();
 
-    //    NetUserDao userDao = new NetUserDao(requestAgent);
-    //    NetThemeDao themeDao = new NetThemeDao(requestAgent);
-    NetReportDao reportDao = new NetReportDao(requestAgent);
-    UserDao userDao = new MariadbUserDao(con);
-    ThemeDao themeDao = new MariadbThemeDao(con);
+    UserDao userDao = sqlSession.getMapper(UserDao.class);
+    ThemeDao themeDao = sqlSession.getMapper(ThemeDao.class);
+    PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+    ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
     UserPrompt userPrompt = new UserPrompt(userDao);
     ThemePrompt themePrompt = new ThemePrompt(themeDao);
 
-    commandMap.put("/user/add", new UserAddHandler(userDao));
+    commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
     commandMap.put("/user/list", new UserListHandler(userDao));
     commandMap.put("/user/detail", new UserDetailHandler(userDao));
-    commandMap.put("/user/update", new AdminUserUpdateHandler(userDao));
-    commandMap.put("/user/delete", new AdminUserDeleteHandler(userDao));
+    commandMap.put("/user/update", new AdminUserUpdateHandler(userDao, sqlSession));
+    commandMap.put("/user/delete", new AdminUserDeleteHandler(userDao, sqlSession));
 
-    commandMap.put("/auth/unregistered", new UserDeleteHandler(userDao));
-    commandMap.put("/auth/edit", new UserUpdateHandler(userDao));
+    commandMap.put("/auth/unregistered", new UserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/auth/edit", new UserUpdateHandler(userDao, sqlSession));
     commandMap.put("/auth/displayLoginUer", new AuthDisplayLoginUserHandler());
 
     commandMap.put("/auth/login", new AuthLoginHandler(userDao,userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
 
-    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao));
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao));
-    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
     commandMap.put("/theme/all", new AllThemeListHandler(themeDao));
 
-    commandMap.put("/place/add", new PlaceAddHandler(themeDao));
-    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao));
+    commandMap.put("/place/add", new PlaceAddHandler(placeDao,sqlSession));
+    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao,placeDao,sqlSession));
     commandMap.put("/place/list", new PlaceListHandler(themeDao));
 
-    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao));
-    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao));
+    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao,sqlSession));
+    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao,sqlSession));
     commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao,userPrompt));
 
-    commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao,userPrompt));
+    commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao,userPrompt,sqlSession));
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
-    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao,userPrompt));
+    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao,userPrompt,sqlSession));
 
-    commandMap.put("/report/theme", new ReportAddThemeHandler(reportDao,themePrompt));
-    commandMap.put("/report/user", new ReportAddUserHandler(reportDao,userPrompt));
-    commandMap.put("/report/list", new ReportMyListHandler(reportDao));
-    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(reportDao,themePrompt,userPrompt));
-    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(reportDao,themePrompt,userPrompt));
+    commandMap.put("/report/theme", new ReportAddThemeHandler(reportDao, themeDao,sqlSession));
+    //    commandMap.put("/report/user", new ReportAddUserHandler(reportDao,userPrompt));
+    //    commandMap.put("/report/list", new ReportMyListHandler(reportDao));
+    //    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(reportDao,themePrompt,userPrompt));
+    //    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(reportDao,themePrompt,userPrompt));
 
-    commandMap.put("/search/searchTheme", new SearchThemeHandler(themeDao));
-    commandMap.put("/search/searchUser", new SearchUserHandler(userDao,themePrompt));
+    commandMap.put("/search/searchTheme", new SearchThemeHandler(themeDao, sqlSession));
+    commandMap.put("/search/searchUser", new SearchUserHandler(userDao,themePrompt, sqlSession));
     commandMap.put("/search/searchHashtag", new SearchHashtagHandler(themeDao,userPrompt));
 
     commandMap.put("/rank/themeRank", new RealTimeRankHandler(themePrompt));
@@ -271,6 +266,7 @@ public class ClientApp {
     //    requestAgent.request("quit", null);
 
     Prompt.close();
+    sqlSession.close();
   }
 
   public static void main(String[] args) throws Exception{

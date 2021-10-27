@@ -9,10 +9,13 @@ public interface UserDao {
   void delete(int userNo) throws Exception;
   void update(User user) throws Exception;
   List<User> findAll() throws Exception;
-  void userLikedUserInsert(int likedUser, int loginUserNo) throws Exception;
-  void userLikedUserDelete(int likedUser, int loginUserNo) throws Exception;
-  List<User> likedUserFindAll(int loginUserNo) throws Exception;
+  void insertLikedUser(int loginUserNo, int likedUserNo) throws Exception;
+  void deleteLikedUser(int loginUserNo, int likedUserNo) throws Exception;
+  List<User> findAllLikedUser(int loginUserNo) throws Exception;
   User findByEmailAndPassword(String email, String password) throws Exception;
   User findByNo(int userNo) throws Exception;
   User findByName(String name) throws Exception;
+  void updateReportedCount(int reportedCount, int userNo) throws Exception;
+  void updateWarnedCount(int warnedCount, int userNo) throws Exception;
+
 }

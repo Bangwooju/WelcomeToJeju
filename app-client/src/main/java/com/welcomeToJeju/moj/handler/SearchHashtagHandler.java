@@ -27,7 +27,7 @@ public class SearchHashtagHandler implements Command {
         return;
       }
 
-      ArrayList<Theme> searchedThemeList = (ArrayList<Theme>) themeDao.hashtagSearch(input);
+      ArrayList<Theme> searchedThemeList = (ArrayList<Theme>) themeDao.searchHashtags(input);
 
       if (searchedThemeList.size() == 0) {
         System.out.println("해당하는 테마 없음!");
@@ -43,7 +43,7 @@ public class SearchHashtagHandler implements Command {
 
   private void printList(List<Theme> themeList) throws Exception {
     for (Theme theme : themeList) {
-      System.out.printf("[%s] 테마명 > %s\n", userPrompt.getByUserNo(theme.getThemeOwnerNo()) , theme.getTitle());
+      System.out.printf("[%s] 테마명 > %s\n", userPrompt.getByUserNo(theme.getOwner().getNo()) , theme.getTitle());
     }
   }
 }
