@@ -46,7 +46,7 @@ public class MyThemeController {
 
     Category c = themeDao.findCategoryByNo(Integer.parseInt(category));
     theme.setCategory(c);
-    theme.setEmoji(emoji);
+    theme.setEmoji("&#" + emoji);
     themeDao.insert(theme);
     for (String hashtag : hashtagArr) {
       if(hashtag.length()==0) continue;

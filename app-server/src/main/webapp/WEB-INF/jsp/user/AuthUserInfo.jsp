@@ -77,9 +77,6 @@
 style = "color : #ffff; background-color:#F6BB43; border:none;">회원 수정</button>
 </form>
 
-<button class="btn btn-outline-dark btn-block" type = "button"
-style = "color : #ffff; background-color:#F6BB43; border:none;">탈퇴하기</button>
-
 <button type="button" class="btn btn-outline-dark btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
 style = "color : #ffff; background-color:#F6BB43; border:none;">
  탈퇴하기
@@ -99,10 +96,9 @@ style = "color : #ffff; background-color:#F6BB43; border:none;">
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
         style = "color : #ffff; background-color:#F6BB43; border:none;">아니오</button>
-        <form class="form-userdelete" action = "delete?no=${loginUser.no}">
-        <button type="button" class="btn btn-primary"
-        style = "color : #ffff; background-color:#F6BB43; border:none;">네</button>
-        </form>
+
+        <a href = "../user/delete?no=${loginUser.no}" class="btn btn-primary" 
+        style = "color : #ffff; background-color:#F6BB43; border:none;">네</a>
       </div>
     </div>
   </div>

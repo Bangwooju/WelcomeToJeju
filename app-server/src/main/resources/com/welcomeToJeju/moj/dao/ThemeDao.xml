@@ -208,7 +208,6 @@
 	  from jeju_theme t
 	    left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
 	    join jeju_theme_category c on c.category_no=t.category_no
-	    inner join emoji e on e.emoji=t.emoji
 	  where
 	    user_no=#{no}
   </select>

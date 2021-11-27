@@ -60,12 +60,12 @@
       
       <label for='f-title'>제목</label>
       <input id='f-title' type='text' name='title' value='${theme.title}' readonly>
-      <a href='../likedtheme/add?themeNo=${theme.no}&userNo=${loginUser.no}'>📌</a><br>
+      <a href='../likedtheme/add?themeNo=${theme.no}&userNo=${loginUser.no}'>📌</a>
       <a href='../report/themeform?no=${theme.no}'> 🚨</a><br>
       
       <label for='f-nickname'>닉네임</label>
       <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 
-      <a href='../likeduser/add?userNo=${theme.owner.no}&themeNo=${theme.no}'>📌</a><br>
+      <a href='../likeduser/add?userNo=${theme.owner.no}&themeNo=${theme.no}'>📌</a>
       <a href='../report/userform?no=${theme.no}'> 🚨</a><br>
       
       <label for='f-category'>카테고리</label>

@@ -58,12 +58,12 @@
 <h5>이모지</h5>
 <select class="form-select" aria-label="f-emoji" id="f-emoji" name="emoji">
   <option selected value="">👇</option>
-  <option value=&#127776;>&#127776;</option>
-  <option value=&#128511;>&#128511;</option>
-  <option value=&#128031;>&#128031;</option>
-  <option value=&#127754;>&#127754;</option>
-  <option value=&#128674;>&#128674;</option>
-  <option value=&#9992;>&#9992;</option>
+  <option value="127776;">&#127776;</option>
+  <option value="128511;">&#128511;</option>
+  <option value="128031;">&#128031;</option>
+  <option value="127754;">&#127754;</option>
+  <option value="128674;">&#128674;</option>
+  <option value="9992;">&#9992;</option>
 </select>
 </div>
 
@@ -100,7 +100,7 @@
 	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
 	</div>
 </div>
-<h4>엔터로 해시태그를 구분합니다!</h4>
+<h5>스페이스 바로 해시태그를 구분합니다!</h5>
 <br>
 
 <div class="text-center">
