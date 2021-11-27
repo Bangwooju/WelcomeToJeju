@@ -20,21 +20,30 @@ public class Theme implements Comparable<Theme> {
   private List<Place> placeList = new ArrayList<>();
   private List<String> hashtags = new ArrayList<>();
 
+
+
   @Override
   public String toString() {
     return "Theme [no=" + no + ", title=" + title + ", owner=" + owner + ", category=" + category
-        + ", isPublic=" + isPublic + ", isShare=" + isShare + ", viewCount=" + viewCount
-        + ", reportedCount=" + reportedCount + ", placeList=" + placeList + ", hashtags=" + hashtags
-        + "]";
+        + ", isPublic=" + isPublic + ", isShare=" + isShare + ", emoji=" + emoji + ", viewCount="
+        + viewCount + ", reportedCount=" + reportedCount + ", placeList=" + placeList
+        + ", hashtags=" + hashtags + "]";
   }
+
 
   public String getEmoji() {
     return emoji;
   }
 
+
+
+
   public void setEmoji(String emoji) {
     this.emoji = emoji;
   }
+
+
+
 
   public int getNo() {
     return no;

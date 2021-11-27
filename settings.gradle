@@ -9,3 +9,5 @@
 
 rootProject.name = 'wtj'
 include('app')
+include('app-client')
+include('app-server')

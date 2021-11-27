@@ -25,7 +25,7 @@
 <br>
 
 <div class="add-form">
-<form id="theme-form" action="add" method="post" enctype="multipart/form-data">
+<form id="theme-form" action="add" method = "post" enctype="multipart/form-data">
 
 <div class="mb-3 row">
 <h5>테마 이름</h5>
@@ -58,12 +58,12 @@
 <h5>이모지</h5>
 <select class="form-select" aria-label="f-emoji" id="f-emoji" name="emoji">
   <option selected value="">👇</option>
-  <option value="1">&#127776;</option>
-  <option value="2">&#128511;</option>
-  <option value="3">&#128031;</option>
-  <option value="4">&#127754;</option>
-  <option value="5">&#128674;</option>
-  <option value="6">&#9992;</option>
+  <option value=&#127776;>&#127776;</option>
+  <option value=&#128511;>&#128511;</option>
+  <option value=&#128031;>&#128031;</option>
+  <option value=&#127754;>&#127754;</option>
+  <option value=&#128674;>&#128674;</option>
+  <option value=&#9992;>&#9992;</option>
 </select>
 </div>
 
@@ -100,7 +100,7 @@
 	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
 	</div>
 </div>
-
+<h4>엔터로 해시태그를 구분합니다!</h4>
 <br>
 
 <div class="text-center">
