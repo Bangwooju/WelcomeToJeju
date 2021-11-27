@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry output="bin/main" kind="src" path="src/main/java">
 		<attributes>
 			<attribute name="gradle_scope" value="main"/>
@@ -12,21 +13,6 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry output="bin/test" kind="src" path="src/test/java">
-		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry output="bin/test" kind="src" path="src/test/resources">
-		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/5.3.13/1e9e88fe6a26b39d35de1fffc04f2c387d8f8512/spring-webmvc-5.3.13-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/5.3.13/cea31c85fa84dbd9f8df14a3ca62ab57c25cabe4/spring-webmvc-5.3.13.jar">
@@ -78,6 +64,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.7/1c08127ce423e06c2dd159ee80830f608cab074/mybatis-3.5.7-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.7/f7974c644bcabae494512bddd105a1733316b376/mybatis-3.5.7.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.8/c0f02b42d0474823279fc9606a81338896d59941/gson-2.8.8-sources.jar" kind="lib" path="C:/Users/New/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.8/431fc3cbc0ff81abdbfde070062741089c3ba874/gson-2.8.8.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

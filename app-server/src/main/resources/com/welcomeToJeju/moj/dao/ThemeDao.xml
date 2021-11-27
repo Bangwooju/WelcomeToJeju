@@ -337,7 +337,7 @@
 		  left join jeju_theme_hashtag h on t.theme_no=h.theme_no
 		  inner join jeju_user u on t.user_no=u.user_no
 		order by
-		  view_cnt desc
+		  view_cnt desc limit 10
   </select>
   
   <select id="findAllReportedTheme" resultMap="ThemeMap">

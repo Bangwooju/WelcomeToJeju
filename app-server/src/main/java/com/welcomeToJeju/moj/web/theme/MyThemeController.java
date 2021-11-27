@@ -32,23 +32,25 @@ public class MyThemeController {
 
   @PostMapping("/mytheme/add")
   public String add(HttpSession session, 
-  		String title, 
-  		String category,
-  		String isPublic,
-  		String hashtags) throws Exception {
-  	User user = (User) session.getAttribute("loginUser");
-  	Theme theme = new Theme();
-  	theme.setTitle(title);
-  	theme.setIsPublic(Integer.parseInt(isPublic));
+      String title, 
+      String category,
+      String isPublic,
+      String hashtags,
+      String emoji) throws Exception {
+    User user = (User) session.getAttribute("loginUser");
+    Theme theme = new Theme();
+    theme.setTitle(title);
+    theme.setIsPublic(Integer.parseInt(isPublic));
     theme.setOwner(user);
-    String[] hashtagArr = hashtags.split("#");
+    String[] hashtagArr = hashtags.split(" ");
 
     Category c = themeDao.findCategoryByNo(Integer.parseInt(category));
     theme.setCategory(c);
+    theme.setEmoji(emoji);
     themeDao.insert(theme);
     for (String hashtag : hashtagArr) {
-    	if(hashtag.length()==0) continue;
-      themeDao.insertHashtag(theme.getNo(), hashtag);
+      if(hashtag.length()==0) continue;
+      themeDao.insertHashtag(theme.getNo(), "#"+hashtag);
     }
     sqlSessionFactory.openSession().commit();
     return "redirect:list?no=" + user.getNo();
@@ -66,23 +68,30 @@ public class MyThemeController {
     return mv;
   }
 
-  // 테스트!!
+
   @PostMapping("/mytheme/update")
-  public ModelAndView update(Theme theme, int category) throws Exception {
-//    Theme oldTheme = themeDao.findByNo(theme.getNo());
-//
-//    if (oldTheme == null) {
-//      throw new Exception("..");
-//    }
-//
-//    Category c = themeDao.findCategoryByNo(category);
-//    theme.setCategory(c);
-//
-//    themeDao.update(theme);
-//    sqlSessionFactory.openSession().commit();
-//
+  public ModelAndView update(Theme theme, int category, String hashtags, HttpSession session) throws Exception {
+    Theme oldTheme = themeDao.findByNo(theme.getNo());
+    User user = (User) session.getAttribute("loginUser");
+    Category c = themeDao.findCategoryByNo(category);
+    theme.setCategory(c);
+    theme.setEmoji(oldTheme.getEmoji());
+    theme.setIsPublic(oldTheme.getIsPublic());
+    theme.setOwner(oldTheme.getOwner());
+    theme.setPlaceList(oldTheme.getPlaceList());
+    theme.setReportedCount(oldTheme.getReportedCount());
+    theme.setViewCount(oldTheme.getViewCount());  
+    themeDao.deleteHashtag(oldTheme.getNo());
+    themeDao.update(theme);
+
+    String[] hashtagArr = hashtags.split("#");
+    for (String hashtag : hashtagArr) {
+      if(hashtag.length()==0) continue;
+      themeDao.insertHashtag(theme.getNo(), hashtag);
+    }
+    sqlSessionFactory.openSession().commit();
     ModelAndView mv = new ModelAndView();
-//    mv.setViewName("redirect:detail?no=" + theme.getNo());
+    mv.setViewName("redirect:list?no=" + user.getNo());
     return mv;
   }
 
@@ -90,11 +99,17 @@ public class MyThemeController {
   @GetMapping("/mytheme/delete")
   public ModelAndView delete(HttpSession session, int no) throws Exception {
     User user = (User) session.getAttribute("loginUser");
-
-    themeDao.delete(no);
+    Theme theme = themeDao.findByNo(no);
+    themeDao.deleteAllLikedThemeByThemeNo(theme.getNo());
+    themeDao.deleteHashtag(theme.getNo());
+    themeDao.deletePlaceUserTheme(theme.getNo());
+    themeDao.delete(theme.getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "나의 테마 만들기");
+    mv.addObject("contentUrl", "theme/myTheme/MyThemeAddForm.jsp");
+    mv.setViewName("template_main");
     mv.setViewName("redirect:list?no=" + user.getNo());
     return mv;
   }

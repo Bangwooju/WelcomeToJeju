@@ -74,7 +74,9 @@
       <label for='f-hashtags'>해시태그</label>
       <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}' readonly><br>
     
-      <a href='../home'>[목록]</a>
+      <a href='../mytheme/list?no=${loginUser.no}'>목록</a>
+      <a href='../mytheme/update?=no${theme.no}'>변경</a>
+      <a href='../mytheme/delete?no=${theme.no}'>삭제</a>
       </form>
     </div>
   </div>

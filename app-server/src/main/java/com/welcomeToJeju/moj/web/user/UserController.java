@@ -65,11 +65,10 @@ public class UserController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원 가입 하기");
-    mv.addObject("contentUrl", "user/UserAddForm2.jsp");
+    mv.addObject("contentUrl", "user/UserAddForm.jsp");
     mv.setViewName("template_main");
     return mv;
   }
-
 
   @GetMapping("/user/delete")
   public ModelAndView delete(int no, HttpSession session) throws Exception {

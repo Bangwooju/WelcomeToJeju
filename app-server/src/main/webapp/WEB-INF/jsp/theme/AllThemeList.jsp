@@ -14,6 +14,7 @@
 <h1 style=text-align:center;>전체 테마 보기</h1>
 <br>
 
+<c:if test="${!empty loginUser}">
 <ul class="theme-list">
 <a class="list-container" href="../mytheme/addform">
     <li>
@@ -24,6 +25,7 @@
     </li>
 </a>
 </ul>
+</c:if>
 
 <ul class="theme-list">
 <c:forEach items="${themeList}" var="theme">

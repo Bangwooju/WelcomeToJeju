@@ -55,6 +55,19 @@
 </div>
 
 <div>
+<h5>이모지</h5>
+<select class="form-select" aria-label="f-emoji" id="f-emoji" name="emoji">
+  <option selected value="">👇</option>
+  <option value="1">&#127776;</option>
+  <option value="2">&#128511;</option>
+  <option value="3">&#128031;</option>
+  <option value="4">&#127754;</option>
+  <option value="5">&#128674;</option>
+  <option value="6">&#9992;</option>
+</select>
+</div>
+
+<div>
 <h5>공개 / 비공개</h5>
 <select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
   <option selected value="1">공개</option>

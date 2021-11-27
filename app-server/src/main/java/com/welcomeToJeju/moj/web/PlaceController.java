@@ -45,6 +45,16 @@ public class PlaceController {
     return mv;
   }
 
+  @GetMapping("mythemelist")
+  public ModelAndView mythemelist(String no) throws Exception{
+    ModelAndView mv = new ModelAndView();
+    themeNo = Integer.parseInt(no);
+    Theme theme = themeDao.findByNo(themeNo);
+    mv.addObject(theme);
+    mv.setViewName("place/MyThemePlaceList");
+    return mv;
+  }
+
   @GetMapping(value="list01", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list_get() throws Exception{
