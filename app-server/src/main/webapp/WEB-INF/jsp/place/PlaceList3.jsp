@@ -74,7 +74,8 @@
       <label for='f-hashtags'>해시태그</label>
       <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}' readonly><br>
     
-      <a href='../home'>[목록]</a>
+      <button type="button" class="btn btn-primary"
+            onclick="history.go(-1)">[목록]</button>
       </form>
     </div>
   </div>
