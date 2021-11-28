@@ -68,26 +68,37 @@ public class MyThemeController {
     return mv;
   }
 
+  @GetMapping("/mytheme/updateform")
+  public ModelAndView updateForm(int no) throws Exception {
+
+    Theme theme = themeDao.findByNo(no);
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("theme",theme);
+    mv.addObject("pageTitle", "나의 테마 변경하기");
+    mv.addObject("contentUrl", "theme/myTheme/MyThemeUpdateForm.jsp");
+    mv.setViewName("template_main");
+    return mv;
+  }
+
 
   @PostMapping("/mytheme/update")
-  public ModelAndView update(Theme theme, int category, String hashtags, HttpSession session) throws Exception {
-    Theme oldTheme = themeDao.findByNo(theme.getNo());
+  public ModelAndView update(int no, String title, String category,
+      String isPublic, String hashtags, String emoji, HttpSession session) throws Exception {
+    Theme theme = themeDao.findByNo(no);
     User user = (User) session.getAttribute("loginUser");
-    Category c = themeDao.findCategoryByNo(category);
+    theme.setTitle(title);
+    Category c = themeDao.findCategoryByNo(Integer.parseInt(category));
     theme.setCategory(c);
-    theme.setEmoji(oldTheme.getEmoji());
-    theme.setIsPublic(oldTheme.getIsPublic());
-    theme.setOwner(oldTheme.getOwner());
-    theme.setPlaceList(oldTheme.getPlaceList());
-    theme.setReportedCount(oldTheme.getReportedCount());
-    theme.setViewCount(oldTheme.getViewCount());  
-    themeDao.deleteHashtag(oldTheme.getNo());
-    themeDao.update(theme);
+    theme.setIsPublic(Integer.parseInt(isPublic));
+    theme.setOwner(user);
+    theme.setEmoji("&#" + emoji);
+    themeDao.deleteHashtag(theme.getNo());
 
-    String[] hashtagArr = hashtags.split("#");
+    themeDao.update(theme);
+    String[] hashtagArr = hashtags.split(" ");
     for (String hashtag : hashtagArr) {
       if(hashtag.length()==0) continue;
-      themeDao.insertHashtag(theme.getNo(), hashtag);
+      themeDao.insertHashtag(theme.getNo(),"#"+hashtag);
     }
     sqlSessionFactory.openSession().commit();
     ModelAndView mv = new ModelAndView();

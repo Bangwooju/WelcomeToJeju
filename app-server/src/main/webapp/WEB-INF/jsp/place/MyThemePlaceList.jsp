@@ -75,7 +75,7 @@
       <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}' readonly><br>
     
       <a href='../mytheme/list?no=${loginUser.no}'>목록</a>
-      <a href='../mytheme/update?=no${theme.no}'>변경</a>
+      <a href='../mytheme/updateform?no=${theme.no}'>변경</a>
       <a href='../mytheme/delete?no=${theme.no}'>삭제</a>
       </form>
     </div>
