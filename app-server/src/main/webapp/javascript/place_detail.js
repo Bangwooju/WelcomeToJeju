@@ -4,7 +4,7 @@
 
     const qs = x => document.querySelector(x);
     
-    const $placesList = qs("#placesList");
+    const $place = qs("#place");
 		const $placeName = qs("#place_name");
 		const $placeAddress = qs("#address_name");
 		const $placeComment = qs("#place_comment");
@@ -42,14 +42,14 @@
 					  placeData = JSON.parse(xhr.responseText);
 						displayPlaces(placeData);
 					};
-					xhr.open("GET", "../../app/place/list01", true);
+					xhr.open("GET", "../../app/place/list02", true);
 					xhr.send();
 				}
 				
         // 검색 결과 목록과 마커를 표출하는 함수입니다
         function displayPlaces(places) {
 
-            let listEl = document.getElementById('placesList');
+            let listEl = document.getElementById('place');
             let menuEl = document.getElementById('menu_wrap');
             let fragment = document.createDocumentFragment();
             let bounds = new kakao.maps.LatLngBounds();

@@ -46,10 +46,12 @@ public class PlaceController {
   }
 
   @GetMapping("detail")
-  public ModelAndView detail(String placeId) throws Exception{
+  public ModelAndView detail(String id) throws Exception{
     ModelAndView mv = new ModelAndView();
-    //Place place = placeDao.findAllByPlaceId(placeId);
-    //  mv.addObject(place);
+    System.out.println(id);
+    Place place = placeDao.findByPlaceId(id);
+    System.out.println(place);
+    mv.addObject(place);
     mv.setViewName("place/PlaceDetail");
     return mv;
   }
@@ -69,6 +71,12 @@ public class PlaceController {
   public String list_get() throws Exception{
     return new Gson().toJson(placeDao.findAllByThemeNo(themeNo));
   }
+  //
+  //  @GetMapping(value="list02", produces="application/json;charset=UTF-8")
+  //  @ResponseBody
+  //  public String list2_get() throws Exception{
+  //    return new Gson().toJson(placeDao.findAllByPlaceId(id));
+  //  }
 
   @GetMapping("search")
   public String search(Model model, String keyword) throws Exception{

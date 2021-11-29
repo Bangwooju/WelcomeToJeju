@@ -96,19 +96,10 @@
       p.place_name,
       p.place_address,
       p.x_coord,
-      p.y_coord,
-      pp.file_path,
-      pp.place_photo_no,
-      c.comment,
-      c.comment_no,
-      jput.theme_no,
-      jput.user_no
+      p.y_coord
     from
       jeju_place p
-      join jeju_place_photo pp on p.place_id=pp.place_id
-      join jeju_place_comment c on p.place_id=c.place_id
-      join jeju_place_user_theme jput on jput.place_id=p.place_id
-    where jput.place_id=#{placeId}
+    where p.place_id=#{id}
   </select>
   
   
@@ -139,7 +130,6 @@
            p.y_coord,
            jput.theme_no,
            jput.user_no,
-           jput.place_id,
            jt.title
        from
            jeju_place p

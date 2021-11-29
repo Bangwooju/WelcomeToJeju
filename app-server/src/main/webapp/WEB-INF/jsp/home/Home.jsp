@@ -146,7 +146,7 @@
         <ul class="hot-place-list owl-carousel">
             <c:forEach items="${Top10Places}" var="place">
                 <li>
-                    <a href="../place/detail?id=${place.id}" class="content">
+                    <a href="place/detail?id=${place.id}" class="content">
                         <div class="desc">
                             <div class="name">${place.place_name}</div>
                             <div class="address">${place.address_name}</div>
