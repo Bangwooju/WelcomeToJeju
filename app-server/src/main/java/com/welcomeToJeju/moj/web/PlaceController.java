@@ -41,7 +41,7 @@ public class PlaceController {
     themeNo = Integer.parseInt(no);
     Theme theme = themeDao.findByNo(themeNo);
     mv.addObject(theme);
-    mv.setViewName("place/PlaceList3");
+    mv.setViewName("place/PlaceList");
     return mv;
   }
 
@@ -93,9 +93,7 @@ public class PlaceController {
     for(Part p : photoFile) {
       param2.put("placeId", place.getId());
       param2.put("userNo", user.getNo());
-      System.out.println(p);
       String filename = UUID.randomUUID().toString();
-      System.out.println(filename);
       p.write(sc.getRealPath("/upload/place") + "/" + filename);
 
       Thumbnails.of(sc.getRealPath("/upload/place") + "/" + filename)
