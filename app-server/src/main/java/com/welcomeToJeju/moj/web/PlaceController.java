@@ -45,6 +45,15 @@ public class PlaceController {
     return mv;
   }
 
+  @GetMapping("detail")
+  public ModelAndView detail(String placeId) throws Exception{
+    ModelAndView mv = new ModelAndView();
+    //Place place = placeDao.findAllByPlaceId(placeId);
+    //  mv.addObject(place);
+    mv.setViewName("place/PlaceDetail");
+    return mv;
+  }
+
   @GetMapping("mythemelist")
   public ModelAndView mythemelist(String no) throws Exception{
     ModelAndView mv = new ModelAndView();

@@ -140,13 +140,13 @@
 
    <div class="hot-place">
         <div class="title">
-            <span>지도 순위</span>
-            <div class="sub">인기있는 지도</div>
+            <span>장소 순위</span>
+            <div class="sub">인기있는 장소</div>
         </div>
         <ul class="hot-place-list owl-carousel">
             <c:forEach items="${Top10Places}" var="place">
                 <li>
-                    <a href="#" class="content">
+                    <a href="../place/detail?id=${place.id}" class="content">
                         <div class="desc">
                             <div class="name">${place.place_name}</div>
                             <div class="address">${place.address_name}</div>
