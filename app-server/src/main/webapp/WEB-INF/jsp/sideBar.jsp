@@ -73,6 +73,13 @@
 <c:if test="${empty loginUser}">
 <div class="logout-menu-box">
 <ul class="logout-menu-box-list">
+<a href="${contextRoot}/app/theme/list">
+  <li><span class="emozi">🗺</span><span class="name">전체 테마 보기</span></li>
+  </a>
+  <a href="${contextRoot}/app/ranking">
+  <li><span class="emozi">🏆</span><span class="name">순위</span></li>
+  </a>
+  
 <li>
 	<form action='${contextRoot}/app/auth/loginform'>
 	<span class="emozi">🚪</span><button type="submit" class="name">로그인</button>

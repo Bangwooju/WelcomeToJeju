@@ -23,12 +23,14 @@
   	<div class="modal_body">
   		<div class="place_info_box">
 		    <label for='f-place-name'>장소 이름</label>
-		    <input id='place_name' type='text' name='place_name' readonly>
+		    <input id='place_name' type='text' name='place_name' 
+		    style =" text-align: center;" readonly>
 	    </div>
 		  
 	    <div class="place_info_box">
  			  <label for='f-address-name'>주소</label>
-		    <input id='address_name' type='text' name='address_name' readonly>
+		    <input id='address_name' type='text' name='address_name' 
+		    style =" text-align: center;" readonly>
 	    </div>
 	    
 			<div class="place_info_box">
@@ -36,7 +38,8 @@
 		    <div id='place_comment' rows="5" cols="30"></div>
 			</div>
 			
-			<button class="place_cancel_btn" type="button">닫기</button>
+			<button class="place_cancel_btn" type="button"
+			style="background-color:transparent;">닫기</button>
 		</div>
 	</div>
   	
@@ -81,11 +84,12 @@
   </div>
 </div>  <!-- .themedetail -->
 <!-- 여기까지 -->
-
         <ul id="placesList"></ul>
       </div>
     </div>
   </div>
+  
+<!-- 
   <form id="place_search_box" action="${contextRoot}/app/place/search">
     <div class="place_search_container">
       <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
@@ -94,6 +98,8 @@
         </button>
     </div>
   </form>
+   -->
+  
 </body>
 
 </html>
