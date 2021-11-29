@@ -10,7 +10,7 @@
 </button>
 
 <!-- 로그인 -->
-<c:if test="${!empty loginUser}">
+<c:if test="${!empty loginUser && loginUser.nickname ne '제주정승'}">
 <div class="my-menu-box">
 <ul class="my-menu-list">
   <a href = "${contextRoot}/app/auth/userinfo">
@@ -25,9 +25,9 @@
   <a href="${contextRoot}/app/likeduser/list">
   <li><span class="emozi">📌</span><span class="name">좋아하는 유저</span></li>
   </a>
+  <li><span class="emozi">🚨</span><span class="name">신고</span></li>  
 </ul>
 </div>
-</c:if>
 
 <div class="public-menu-box">
 <ul class="public-menu-box-list">
@@ -37,9 +37,9 @@
 	<a href="${contextRoot}/app/ranking">
 	<li><span class="emozi">🏆</span><span class="name">순위</span></li>
 	</a>
-	<li><span class="emozi">🚨</span><span class="name">신고</span></li>
 </ul>        
 </div>
+</c:if>
 
 <!-- 관리자 -->
 <c:if test="${loginUser.nickname eq '제주정승'}">
