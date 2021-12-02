@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +12,11 @@
   <title>장소 리스트</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=667ac3a1fc68d5afe81179dea5f4ff16&libraries=services"></script>
     <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=2">
+    <script defer type="text/javascript" src="${contextRoot}/javascript/place_detail.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script defer type="text/javascript" src="${contextRoot}/javascript/place_detail.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=2">
 </head>
 
 
