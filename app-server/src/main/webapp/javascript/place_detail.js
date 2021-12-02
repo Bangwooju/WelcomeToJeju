@@ -42,7 +42,7 @@
             placeData = JSON.parse(xhr.responseText);
             displayPlaces(placeData);
           };
-          xhr.open("GET", "../../app/place/list2", true);
+          xhr.open("GET", "../../app/place/list02", true);
           xhr.send();
         }
         

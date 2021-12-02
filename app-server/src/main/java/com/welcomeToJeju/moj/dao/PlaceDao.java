@@ -17,10 +17,9 @@ public interface PlaceDao {
   void deleteComment(String id) throws Exception;
 
   List<Place> findAllByThemeNo(int themeNo) throws Exception;
-  Place findAllByPlaceId(String placeId) throws Exception;
   List<Place> findTop10() throws Exception;
   List<Comment> findAllCommentsByPlaceId(String id) throws Exception;
-  Place findByPlaceId(String id) throws Exception;
+  List<Place> findByPlaceId(String id) throws Exception;
 
 
 }

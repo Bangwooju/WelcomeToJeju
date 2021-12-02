@@ -97,18 +97,6 @@
     where jput.theme_no=#{no}
   </select>
   
-  <select id="findAllByPlaceId" resultMap="PlaceMap" parameterType="String">
-    select
-      p.place_id,
-      p.place_name,
-      p.place_address,
-      p.x_coord,
-      p.y_coord
-    from
-      jeju_place p
-    where p.place_id=#{id}
-  </select>
-
   <select id="findAllCommentsByPlaceId" resultMap="CommentMap" parameterType="String">
     select
       c.comment,

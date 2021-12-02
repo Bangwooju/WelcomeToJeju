@@ -36,7 +36,7 @@ public class PlaceController {
   @Autowired PlaceDao placeDao;
   @Autowired ThemeDao themeDao;  
   int themeNo = 0;
-  String id = "";
+  String placeId = "";
 
   @GetMapping("list")
   public ModelAndView list(String no) throws Exception{
@@ -51,9 +51,8 @@ public class PlaceController {
   @GetMapping("detail")
   public ModelAndView detail(String id) throws Exception{
     ModelAndView mv = new ModelAndView();
-    Place place = placeDao.findByPlaceId(id);
+    placeId = id;
     List<Comment> comment = placeDao.findAllCommentsByPlaceId(id);
-    mv.addObject("place", place);
     mv.addObject("comment", comment);
     mv.setViewName("place/PlaceDetail");
     return mv;
@@ -75,10 +74,10 @@ public class PlaceController {
     return new Gson().toJson(placeDao.findAllByThemeNo(themeNo));
   }
 
-  @GetMapping(value="list2", produces="application/json;charset=UTF-8")
+  @GetMapping(value="list02", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list2_get() throws Exception{
-    return new Gson().toJson(placeDao.findByPlaceId(id));
+    return new Gson().toJson(placeDao.findByPlaceId(placeId));
   }
 
   @GetMapping("search")
