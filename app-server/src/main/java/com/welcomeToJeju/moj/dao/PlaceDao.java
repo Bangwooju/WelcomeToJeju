@@ -2,6 +2,7 @@ package com.welcomeToJeju.moj.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import com.welcomeToJeju.moj.domain.Comment;
 import com.welcomeToJeju.moj.domain.Place;
 
 public interface PlaceDao {
@@ -18,7 +19,7 @@ public interface PlaceDao {
   List<Place> findAllByThemeNo(int themeNo) throws Exception;
   Place findAllByPlaceId(String placeId) throws Exception;
   List<Place> findTop10() throws Exception;
-
+  List<Comment> findAllCommentsByPlaceId(String id) throws Exception;
   Place findByPlaceId(String id) throws Exception;
 
 

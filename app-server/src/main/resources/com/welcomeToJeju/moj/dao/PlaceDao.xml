@@ -32,6 +32,13 @@
     </collection>
   </resultMap>
   
+  <resultMap type="Comment" id="CommentMap">
+      <id column="comment_no" property="no"/>
+      <result column="place_id" property="placeId"/>
+      <result column="user_no" property="userNo"/>
+      <result column="comment" property="comment"/>
+  </resultMap>
+  
   <insert id="insert" parameterType="Place"
     useGeneratedKeys="true" keyColumn="place_id" keyProperty="id">
     insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord)
@@ -90,7 +97,7 @@
     where jput.theme_no=#{no}
   </select>
   
-    <select id="findAllByPlaceId" resultMap="PlaceMap" parameterType="String">
+  <select id="findAllByPlaceId" resultMap="PlaceMap" parameterType="String">
     select
       p.place_id,
       p.place_name,
@@ -101,7 +108,18 @@
       jeju_place p
     where p.place_id=#{id}
   </select>
-  
+
+  <select id="findAllCommentsByPlaceId" resultMap="CommentMap" parameterType="String">
+    select
+      c.comment,
+      c.comment_no,
+      c.place_id,
+      c.user_no
+    from
+      jeju_place_comment c
+      join jeju_place p on c.place_id=p.place_id
+    where c.place_id=#{id}
+  </select>  
   
   <select id="findByPlaceId" resultMap="PlaceMap" parameterType="String">
     select

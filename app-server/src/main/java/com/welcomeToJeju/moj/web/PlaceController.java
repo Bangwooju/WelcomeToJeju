@@ -1,6 +1,7 @@
 package com.welcomeToJeju.moj.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Comment;
 import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.domain.User;
@@ -34,6 +36,7 @@ public class PlaceController {
   @Autowired PlaceDao placeDao;
   @Autowired ThemeDao themeDao;  
   int themeNo = 0;
+  String id = "";
 
   @GetMapping("list")
   public ModelAndView list(String no) throws Exception{
@@ -48,10 +51,10 @@ public class PlaceController {
   @GetMapping("detail")
   public ModelAndView detail(String id) throws Exception{
     ModelAndView mv = new ModelAndView();
-    System.out.println(id);
     Place place = placeDao.findByPlaceId(id);
-    System.out.println(place);
-    mv.addObject(place);
+    List<Comment> comment = placeDao.findAllCommentsByPlaceId(id);
+    mv.addObject("place", place);
+    mv.addObject("comment", comment);
     mv.setViewName("place/PlaceDetail");
     return mv;
   }
@@ -71,12 +74,12 @@ public class PlaceController {
   public String list_get() throws Exception{
     return new Gson().toJson(placeDao.findAllByThemeNo(themeNo));
   }
-  //
-  //  @GetMapping(value="list02", produces="application/json;charset=UTF-8")
-  //  @ResponseBody
-  //  public String list2_get() throws Exception{
-  //    return new Gson().toJson(placeDao.findAllByPlaceId(id));
-  //  }
+
+  @GetMapping(value="list2", produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String list2_get() throws Exception{
+    return new Gson().toJson(placeDao.findByPlaceId(id));
+  }
 
   @GetMapping("search")
   public String search(Model model, String keyword) throws Exception{
