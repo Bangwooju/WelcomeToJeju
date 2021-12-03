@@ -88,17 +88,7 @@
       </div>
     </div>
   </div>
-  
-<!-- 
-  <form id="place_search_box" action="${contextRoot}/app/place/search">
-    <div class="place_search_container">
-      <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
-        <button class="search-icon">
-          <i class="fas fa-search"></i>
-        </button>
-    </div>
-  </form>
-   -->
+
   
 </body>
 

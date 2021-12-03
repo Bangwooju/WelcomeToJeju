@@ -39,20 +39,7 @@
         <label for='f-comment'>후기</label>
         <div id='place_comment' rows="5" cols="30"></div>
       </div>
-        <!-- 
-        <label for='f-place-name'>장소 이름</label>
-        <input id='f-place_name' type='text' name='place_name' 
-        style =" text-align: center;" readonly>
-      
-        <label for='f-address-name'>주소</label>
-        <input id='f-address-name' type='text' name='address_name' 
-        style =" text-align: center;" readonly>
-      
-        <label for='f-comment'>후기</label>
-	        <c:forEach items="${comment}" var = "comment">
-	          <div> ${comment.comment}</div>
-	        </c:forEach>
-       -->
+        
       <button class="place_cancel_btn" type="button"
       style="background-color:transparent;">닫기</button>
     </div>
