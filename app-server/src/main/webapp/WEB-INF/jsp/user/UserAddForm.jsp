@@ -47,6 +47,20 @@
   </div>
 </div>
 
+<div>
+<h5>이모지</h5>
+<select class="form-select" aria-label="f-emoji" id="f-emoji" name="emoji">
+  <option selected value="">👇</option>
+  <option value="127776;">&#127776;</option>
+  <option value="128511;">&#128511;</option>
+  <option value="128031;">&#128031;</option>
+  <option value="127754;">&#127754;</option>
+  <option value="128674;">&#128674;</option>
+  <option value="9992;">&#9992;</option>
+</select>
+</div>
+
+
 <div class="mb-3 row">
 <h5>닉네임</h5>
   <div class = "col-sm-16">

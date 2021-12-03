@@ -71,6 +71,7 @@
             jeju_user
         order by
             view_cnt desc
+        where active=1
     </select>
   
   <select id="findByNickname" resultMap="UserMap" parameterType="String">

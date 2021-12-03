@@ -48,7 +48,7 @@ public class UserController {
 
   @PostMapping("/user/add")
   public ModelAndView add(User user, HttpServletRequest request) throws Exception {
-
+    //user.setEmoji("&#" + emoji);
     userDao.insert(user);
     sqlSessionFactory.openSession().commit();
 
