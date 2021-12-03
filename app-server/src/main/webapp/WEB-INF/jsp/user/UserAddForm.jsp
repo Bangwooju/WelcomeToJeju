@@ -60,6 +60,7 @@
 </select>
 </div>
 
+<br>
 
 <div class="mb-3 row">
 <h5>닉네임</h5>

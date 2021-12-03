@@ -21,15 +21,16 @@
   </resultMap>
   
   <insert id="insert" parameterType="User">
-    insert into jeju_user(email,password,nickname)
-    values(#{email},password(#{password}),#{nickname})
+    insert into jeju_user(email,password,nickname,emoji)
+    values(#{email},password(#{password}),#{nickname},#{emoji})
   </insert>
   
   <update id="update" parameterType="User">
     update jeju_user set
       email=#{email},
       password=password(#{password}),
-      nickname=#{nickname}
+      nickname=#{nickname},
+      emoji=#{emoji}
     where
       user_no=#{no}
   </update>
@@ -69,9 +70,9 @@
             emoji
         from
             jeju_user
+        where active=1
         order by
             view_cnt desc
-        where active=1
     </select>
   
   <select id="findByNickname" resultMap="UserMap" parameterType="String">
@@ -184,7 +185,7 @@
     set 
       view_cnt= view_cnt + 1
     where 
-      user_no=#{userNo}
+      user_no=#{no}
   </update>
   
   <update id="updateReportedCount" parameterType="map">
@@ -211,7 +212,7 @@
     set 
       active=0
     where 
-      user_no=#{userNo}
+      user_no=#{no}
   </update>
   
   <select id="userRankingByViewCount" resultMap="UserMap">
@@ -244,7 +245,7 @@
     delete from 
       jeju_liked_user 
     where 
-      user_no=#{loginUserNo}
+      user_no=#{no}
   </delete>
    
 </mapper>

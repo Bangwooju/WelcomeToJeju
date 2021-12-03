@@ -47,8 +47,8 @@ public class UserController {
   }
 
   @PostMapping("/user/add")
-  public ModelAndView add(User user, HttpServletRequest request) throws Exception {
-    //user.setEmoji("&#" + emoji);
+  public ModelAndView add(String emoji, User user, HttpServletRequest request) throws Exception {
+    user.setEmoji("&#" + emoji);
     userDao.insert(user);
     sqlSessionFactory.openSession().commit();
 
@@ -90,14 +90,14 @@ public class UserController {
   }
 
   @PostMapping("/user/update")
-  public ModelAndView update(User user, HttpSession session) throws Exception {
+  public ModelAndView update(String emoji, User user, HttpSession session) throws Exception {
     User oldUser = (User) session.getAttribute("loginUser");
     user.setNo(oldUser.getNo());
     user.setEmail(oldUser.getEmail());
     user.setRegisteredDate(oldUser.getRegisteredDate());
     user.setReportedCount(oldUser.getReportedCount());
     user.setViewCount(oldUser.getViewCount());
-
+    user.setEmoji("&#" + emoji);
     userDao.update(user);
     sqlSessionFactory.openSession().commit();
     session.invalidate();

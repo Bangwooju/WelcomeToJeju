@@ -77,10 +77,8 @@
 style = "color : #ffff; background-color:#F6BB43; border:none;">회원 수정</button>
 </form>
 
-<form class = "form-unregistered" action = "userdelete?no=${user.no}">
-<button class="btn btn-outline-dark btn-block" 
-style = "color : #ffff; background-color:#F6BB43; border:none;">회원 삭제</button>
-</form>
+<a href="userdelete?no=${user.no}" class="btn btn-outline-dark btn-block" 
+style = "color : #ffff; background-color:#F6BB43; border:none;">회원 삭제</a>
 
 <form class="form-logout" action = "userlist">
 <button class="btn btn-outline-dark btn-block"
