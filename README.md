@@ -32,8 +32,13 @@
 
 ![placedetail](./img/placedetail.JPG)
 
-![search](./img/search.JPG)
+![search](./img/search.jpg)
 
 ![likeduser](./img/likeduser.JPG)
 
 ![ranking](./img/ranking.JPG)
+
+> **💜 개발환경**
+
+![tools](./img/tools.JPG)
+
