@@ -18,11 +18,22 @@
 
 > **💙 구현기능**
 
+![main](./img/main.JPG)
 
+![auth](./img/auth.JPG)
 
+![theme](./img/theme.JPG)
 
+![themelist](./img/themelist.JPG)
 
+![place](./img/place.JPG)
 
+![placeadd](./img/placeadd.JPG)
 
+![placedetail](./img/placedetail.JPG)
 
+![search](./img/search.JPG)
 
+![likeduser](./img/likeduser.JPG)
+
+![ranking](./img/ranking.JPG)
